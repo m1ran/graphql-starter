@@ -2,11 +2,11 @@ import Sequelize from 'sequelize';
 
 const Conn = new Sequelize(
   'graphql',
-  'graphql',
-  'J1o6S1z9',
+  'root',
+  '',
   {
     dialect: 'mysql',
-    host: 'hosting.urancompany.com'
+    host: 'localhost'
   }
 );
 
