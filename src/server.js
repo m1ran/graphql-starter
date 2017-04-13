@@ -5,7 +5,7 @@ import Schema from './data/schema';
 import Helper from './data/helper';
 
 // Config
-const PORT = 4000;
+const PORT = process.env.PORT || 4000;
 
 const app = Express();
 
