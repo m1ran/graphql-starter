@@ -16,7 +16,10 @@ export default class Helper {
         where[key] = args[key];
       }
     }
-    if (args.first && args.after) {
+    if (args.first && args.first > 0) {
+      options.limit = args.first;
+    }
+    if (args.after) {
       let eq = where.id;
       let cursor = new Buffer(args.after, 'base64').toString();
       let id = parseInt(cursor.replace(':', ''));
@@ -27,7 +30,6 @@ export default class Helper {
         if (eq) {
           where.id.$eq = eq;
         }
-        options.limit = args.first;
       }
     }
     if (Object.keys(where).length) {
@@ -42,8 +44,8 @@ export default class Helper {
       if (users.length) {
         let user = users[0];
         return JWT.sign({
-          username: user.dataValues.username,
-          password: user.dataValues.password
+          username: user.username,
+          password: user.password
         }, SECRET);
       } else {
         return null;
@@ -73,7 +75,7 @@ export default class Helper {
     return Helper.getUsers({id: id}).then((users) => {
       if (users.length) {
         let user = users[0];
-        let customerId = user.dataValues.customerId;
+        let customerId = user.customerId;
         // delete customer
         if (customerId) {
           return Helper.deleteCustomer(customerId).then((confirmation) => {

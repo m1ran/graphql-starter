@@ -41,7 +41,7 @@ const User = new GraphQLObjectType({
           }
         },
         resolve: (user, args, {loaders}) => {
-          return loaders.customer.load(user.dataValues.customerId)
+          return loaders.customer.load(user.customerId)
         }
       }
     }
